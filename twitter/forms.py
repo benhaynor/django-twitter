@@ -5,6 +5,7 @@ from django.contrib import auth
 import ipdb
 
 class SignInForm(forms.Form):
+
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
@@ -17,14 +18,15 @@ class SignInForm(forms.Form):
 
     def clean(self):
         super(SignInForm,self).clean()
+        username = self.data['username']
+        password = self.data['password']
         try:
-            username = self.data['username']
-            password = self.data['password']
-            self.user = User.objects.get(username=username)
-            if not self.user.check_password(password):
-                raise ValidationError("The username, password combination could not be found") 
+            User.objects.get(username=username)
         except User.DoesNotExist:
             raise ValidationError("User does not exist")
+        self.user = auth.authenticate(username = username, password = password)
+        if not self.user: 
+            raise ValidationError("Username, password do not match") 
 
     def save(self):
         auth.login(self.request, self.user)
