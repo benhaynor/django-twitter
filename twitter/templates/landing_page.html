@@ -1,5 +1,24 @@
 {% extends "base.html" %}
-{% block title %}Twitter{% endblock %}
+{% block title %}Twitter{%endblock %}
 {% block body %}
-Hello World!
+Sign In
+<div id ="sign-in-form">
+  <form method="post">
+    {% csrf_token %}
+    {{ sign_in_form.as_p }}
+    <input type="hidden" name="post_action" value="sign_in"></input>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+Sign Up
+<div id="sign-up-form">
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="post_action" value="sign_up"></input>
+    {{sign_up_form.as_p}}
+    <button type="submit">Submit</button>
+  </form>
+</div>
 {% endblock %}
+
