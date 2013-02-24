@@ -4,11 +4,11 @@
     <title>Bootstrap 101 Template</title>
     <!-- Bootstrap -->
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="/static/base.css" rel="stylesheet">
+    <link href="/static/base.css" rel="stylesheet">
     <script src="/static/jquery.js"></script>
-		<script src="/static/jquery.cookie.js"></script>
+    <script src="/static/jquery.cookie.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/static/main.js"></script>
+    <script src="/static/main.js"></script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,68 +24,69 @@
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">Connect</a></li>
               <li><a href="#discover">Discover</a></li>
-							<li><a href="#me">Me</a></li>
-						</ul>
-						<form class="navbar-form pull-right">
-							<input type="text" name="search" class="span2" style="height:30px" placeholder="Search">
-							<a class="btn" href="#"><i class="icon-cog"></i></a>	
-						</form>
+              <li><a href="#me">Me</a></li>
+            </ul>
+            <form method="post" class="navbar-form pull-right" action="/logout">
+              {% csrf_token %}
+              <button class="btn" type="submit">Logout</button>	
+            </form>
+            <form class="navbar-form pull-right">
+              {% csrf_token %}
+              <input type="text" name="search" class="span2" style="height:30px" placeholder="Search">
+            </form>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-		<div class="container" id="main-container">
-			<div class="row">
-				<div class="span4 column" id="left-column">
-					<div class="twitter-box top-rectangle">
-						{{user.username}}	
-					</div>
-					<div class="navbar" style="margin-left:15px; margin-bottom:0px; border-radius:0px">
-						<div class="navbar-inner">	
-							<ul class="nav">
-								<li><a href="#">Hey</a>
-								</li><li class="divider-vertical">
-								<li><a href="#">Hey</a>
-								</li><li class="divider-vertical">					
-								<li ><a href="#">Hey</a>
-								</li>					
-							</ul>
-						</div>
-					</div>
-					<!--<div class="twitter-box middle-rectangle pull-left" style="margin:0; width:20%">
-						hey
-					</div>
-					<div class="twitter-box middle-rectangle pull-left" style="margin:0; width:20%">
-						hey
-					</div>
-					<div class="twitter-box middle-rectangle pull-left" style="margin:0; width:30%">
-						hey
-					</div>-->
-					<div class="twitter-box bottom-rectangle">
-					<form method="post">
-						<input type="text" id="new_tweet_box" name="tweet" class="input-large" style="width:100%;height:30px;margin-bottom:0px;" placeholder="Compose new Tweet...">
-					</form>
-					</div>	
-					<div class="twitter-box">
-						Who to follow	
-					</div>
-					<div class="twitter-box">
-						Trends
-					</div>	
-					<div class="twitter-box">
-						Twitter-info		
-					</div>
-				</div>
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="span4 column" id="left-column">
+          <div class="twitter-box top-rectangle">
+            {{user.username}}	
+          </div>
+          <div class="navbar" style="margin-left:15px; margin-bottom:0px; border-radius:0px">
+            <div class="navbar-inner">	
+              <ul class="nav">
+                <li><a href="#">Hey</a>
+                </li><li class="divider-vertical">
+                <li><a href="#">Hey</a>
+                </li><li class="divider-vertical">					
+                <li ><a href="#">Hey</a>
+                </li>					
+              </ul>
+            </div>
+          </div>
+          <div class="twitter-box bottom-rectangle">
+            <form method='post'>
+              {% csrf_token %}
+              {{ tweet_form.as_p }}
+              <button type="submit">Submit</button>
+            </form>
+            <form method="post">
+              {% csrf_token %}
+              <input type="text" id="new_tweet_box" name="tweet" class="input-large" style="width:100%;height:30px;margin-bottom:0px;" placeholder="Compose new Tweet...">
+            </form>
+          </div>	
+          <div class="twitter-box">
+            Who to follow	
+          </div>
+          <div class="twitter-box">
+            Trends
+          </div>	
+          <div class="twitter-box">
+            Twitter-info		
+          </div>
+        </div>
 
-				<div class="span6 column" id="right-column">
-					<div class="twitter-box top-rectangle"><h3>Tweets</h3></div>
-					{% for t in tweets %}
-					<div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">{{t.tweet}}</div>	
-					{% endfor %}
-					</div>
-				</div>
-			</div>
-		</div>	
-  </body>
+        <div class="span6 column" id="right-column">
+          <div class="twitter-box top-rectangle"><h3>Tweets</h3></div>
+          {% for t in tweets %}
+          <div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">{{t.tweet}}</div>	
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>	
+</body>
 </html>
 

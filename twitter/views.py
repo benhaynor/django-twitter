@@ -6,7 +6,7 @@ from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.http import HttpResponseRedirect
-import forms as twitterforms 
+import twitter.forms as twitterforms 
 import ipdb
 
 def landing_page(request):
@@ -17,14 +17,17 @@ def landing_page(request):
         if post_action == 'sign_up':
             sign_up_form = UserCreationForm(request.POST)
             if sign_up_form.is_valid():
-                new_user = sign_up_form.save()
-                return HttpResponse('Congrats, new user!')
+                sign_up_form.save()
+                user = auth.authenticate(username = request.POST['username'], password = request.POST['password1'])
+                auth.login(request,user)
+                return HttpResponseRedirect('/')
 
         elif post_action == 'sign_in':
             sign_in_form = twitterforms.SignInForm(request)
             if sign_in_form.is_valid():
-                user = sign_in_form.save()
-                return HttpResponse("You are signed in") 
+                user = auth.authenticate(username = request.POST['username'], password = request.POST['password'])
+                auth.login(request,user)
+                return HttpResponseRedirect("/") 
 
     #Get, and bad unsuccesful login, signup 
     if not 'sign_up_form' in locals():
@@ -36,4 +39,15 @@ def landing_page(request):
             RequestContext(request))
 
 def profile_page(request):
-    return render_to_response('mainpage.html')
+    if request.method == 'POST':
+        tweet_form = twitterforms.TweetForm(request)
+        if tweet_form.is_valid():
+            tweet_form.save()
+            tweet_form = twitterforms.TweetForm()
+    else:
+        tweet_form = twitterforms.TweetForm()
+    return render_to_response('mainpage.html', {'tweet_form': tweet_form}, RequestContext(request))
+
+def logout(request):
+    auth.logout(request) 
+    return HttpResponseRedirect('/')
