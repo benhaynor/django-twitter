@@ -36,4 +36,4 @@ def landing_page(request):
             RequestContext(request))
 
 def profile_page(request):
-    return HttpResponse("Welcome %s" % request.user.username)
+    return render_to_response('mainpage.html')

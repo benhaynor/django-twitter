@@ -1,0 +1,74 @@
+body {
+	padding-top:40px;
+	background-image:url('bg.png');
+	background-repeat:no-repeat;
+	background-color:#c1deee;
+}
+
+#main-container{
+	background-color:rgba(255,255,255,0.4);
+	height:100%;
+}
+
+#left-column{
+	margin-left:0px;
+	padding-left:15px;
+}
+
+.tweet, .twitter-box, #tweet-header{
+	background-color:#f9f9f9;
+	margin:15px;
+	border-radius:4px;	
+	border:1px solid silver;
+	padding:10px;
+}
+
+.left-columnt .twitter-box{
+	margin-right:0px;
+}
+
+.right-column .twitter-box{
+	margin-left:0px
+}
+
+.twitter-box.top-rectangle{
+	margin-bottom:0px;
+	border-bottom-right-radius:0px;
+	border-bottom-left-radius:0px;
+}
+
+.twitter-box.middle-rectangle{
+	border-radius:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.twitter-box.bottom-rectangle{
+	border-top-right-radius:0px;
+	margin-top:0px;
+	border-top-left-radius:0px;	
+}
+
+#tweet-header{
+	margin-bottom:0px;
+	border-bottom-right-radius:0px;
+	border-bottom-left-radius:0px;
+}
+
+#left-column .twitter-box {
+	margin-right:0px
+}
+
+#right-column .twitter-box {
+	margin-left:0px
+}
+
+.twitter-box{
+	
+}
+
+.tweet{
+	margin-top:0px;
+	border-radius:0px;	
+	margin-bottom:0px;
+}
