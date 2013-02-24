@@ -1,3 +1,4 @@
+from django.contrib.auth import decorators
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -9,6 +10,8 @@ import forms as twitterforms
 import ipdb
 
 def landing_page(request):
+    if request.user.is_authenticated():
+        return profile_page(request)
     if request.method == 'POST':
         post_action = request.POST.get('post_action','')
         if post_action == 'sign_up':
@@ -22,7 +25,6 @@ def landing_page(request):
             if sign_in_form.is_valid():
                 user = sign_in_form.save()
                 return HttpResponse("You are signed in") 
-                
 
     #Get, and bad unsuccesful login, signup 
     if not 'sign_up_form' in locals():
@@ -32,3 +34,6 @@ def landing_page(request):
     return render_to_response('landing_page.html',
             {'sign_up_form': sign_up_form,'sign_in_form':sign_in_form},
             RequestContext(request))
+
+def profile_page(request):
+    return HttpResponse("Welcome %s" % request.user.username)
