@@ -57,14 +57,10 @@
             </div>
           </div>
           <div class="twitter-box bottom-rectangle">
-            <form method='post'>
-              {% csrf_token %}
-              {{ tweet_form.as_p }}
-              <button type="submit">Submit</button>
-            </form>
             <form method="post">
               {% csrf_token %}
-              <input type="text" id="new_tweet_box" name="tweet" class="input-large" style="width:100%;height:30px;margin-bottom:0px;" placeholder="Compose new Tweet...">
+              <input type="text" id="new_tweet_box" name="text" class="input-large" style="width:100%;height:30px;margin-bottom:0px;" placeholder="Compose new Tweet...">
+              <input type="hidden" name="author" value="{{user.id}}">
             </form>
           </div>	
           <div class="twitter-box">
@@ -81,7 +77,7 @@
         <div class="span6 column" id="right-column">
           <div class="twitter-box top-rectangle"><h3>Tweets</h3></div>
           {% for t in tweets %}
-          <div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">{{t.tweet}}</div>	
+          <div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">{{t.text}}</div>	
           {% endfor %}
         </div>
       </div>

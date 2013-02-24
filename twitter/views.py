@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.http import HttpResponseRedirect
+from twitter.models import MyUser
 import twitter.forms as twitterforms 
 import ipdb
 
@@ -23,7 +24,7 @@ def landing_page(request):
                 return HttpResponseRedirect('/')
 
         elif post_action == 'sign_in':
-            sign_in_form = twitterforms.SignInForm(request)
+            sign_in_form = twitterforms.SignInForm(request.POST)
             if sign_in_form.is_valid():
                 user = auth.authenticate(username = request.POST['username'], password = request.POST['password'])
                 auth.login(request,user)
@@ -39,6 +40,7 @@ def landing_page(request):
             RequestContext(request))
 
 def profile_page(request):
+    myuser = MyUser.objects.get(id=request.user.id)
     if request.method == 'POST':
         tweet_form = twitterforms.TweetForm(request)
         if tweet_form.is_valid():
@@ -46,7 +48,7 @@ def profile_page(request):
             tweet_form = twitterforms.TweetForm()
     else:
         tweet_form = twitterforms.TweetForm()
-    return render_to_response('mainpage.html', {'tweet_form': tweet_form}, RequestContext(request))
+    return render_to_response('mainpage.html', {'tweet_form': tweet_form, 'tweets': myuser.tweets()}, RequestContext(request))
 
 def logout(request):
     auth.logout(request) 

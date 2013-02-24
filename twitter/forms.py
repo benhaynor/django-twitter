@@ -11,35 +11,24 @@ class SignInForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-    def __init__(self,request=None):
-        if request:
-            super(SignInForm,self).__init__(request.POST)
-            self.request = request
-        else:
-            super(SignInForm,self).__init__()
-
     def clean(self):
-        super(SignInForm,self).clean()
+        cleaned_data = super(SignInForm, self).clean()
         username = self.data['username']
         password = self.data['password']
         try:
             user = User.objects.get(username=username)
+            if not user.check_password(password): 
+                raise ValidationError("Username, password do not match") 
         except User.DoesNotExist:
             raise ValidationError("User does not exist")
-        #self.user = auth.authenticate(username = username, password = password
-        if not user.check_password(password): 
-            raise ValidationError("Username, password do not match") 
+        return cleaned_data
+
+
 
 class TweetForm(forms.Form):
     text = forms.CharField(max_length=140)
+    author = forms.IntegerField()
 
-    def __init__(self,request = None):
-        if request: 
-            super(TweetForm,self).__init__(request.POST)
-            self.author = request.user
-        else:
-            super(TweetForm,self).__init__()
-    
     def clean_text(self):
         text = self.cleaned_data['text']
         if len(text) > 140:
