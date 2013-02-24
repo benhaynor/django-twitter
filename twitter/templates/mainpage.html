@@ -57,13 +57,13 @@
             </div>
           </div>
           <div class="twitter-box bottom-rectangle">
-              {% for error_type, error_list in tweet_form.errors.iteritems %}
-              {% for error in error_list %}
-              <div class="alert alert-error">
-                {{error}}
-              </div>
-              {% endfor %}
-              {% endfor %}
+            {% for error_type, error_list in tweet_form.errors.iteritems %}
+            {% for error in error_list %}
+            <div class="alert alert-error">
+              {{error}}
+            </div>
+            {% endfor %}
+            {% endfor %}
 
             <form method="post">
               {% csrf_token %}

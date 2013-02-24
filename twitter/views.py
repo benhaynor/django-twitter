@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm
+from twitter.forms import UserCreationForm
 from django import forms
 from django.http import HttpResponseRedirect
 from twitter.models import MyUser
@@ -35,7 +35,7 @@ def landing_page(request):
         sign_up_form = UserCreationForm()
     if not 'sign_in_form' in locals():
         sign_in_form = twitterforms.SignInForm() 
-    return render_to_response('landing_page.html',
+    return render_to_response('login.html',
             {'sign_up_form': sign_up_form,'sign_in_form':sign_in_form},
             RequestContext(request))
 
