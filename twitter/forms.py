@@ -23,8 +23,6 @@ class SignInForm(forms.Form):
             raise ValidationError("User does not exist")
         return cleaned_data
 
-
-
 class TweetForm(forms.Form):
     text = forms.CharField(max_length=140)
     author = forms.IntegerField()
@@ -35,6 +33,10 @@ class TweetForm(forms.Form):
             raise forms.ValidationError('Tweets have a maximum length of 140 characters')
         return text
 
+    def clean_author(self):
+        author = User.objects.get(id=self.cleaned_data['author'])
+        return author
+    
     def save(self):
-        tweet = twitter_models.Tweet(author=self.author, text=self.cleaned_data['text'])
+        tweet = twitter_models.Tweet(author=self.cleaned_data['author'], text=self.cleaned_data['text'])
         tweet.save()

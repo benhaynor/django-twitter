@@ -1,0 +1,49 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/static/base.css" rel="stylesheet">
+		<link href="/static/login.css" rel="stylesheet">
+    <script src="/static/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/static/main.js"></script>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			{% if error %}
+			<div id="login-error" class="span9 message"> 
+				<div class="message-text">{{ error }}</div>
+			</div>		
+			{% endif %}	
+			<div id="left-column" class="span5 column">
+				<div id="twitter-welcome">
+					<h2>Welcome to fake twitter. Rock!</h2>	
+				</div>
+			</div>
+
+			<div id="login-forms" class="span4 column"> 
+	      <form class="form-signin" method="post">
+					<h2 class="form-signin-heading">Please sign in</h2>
+					<input type="text" name="user_name" class="input-block-level" placeholder="Username">
+					<input type="password" name="password" class="input-block-level" placeholder="Password">
+					<button class="btn btn-large btn-primary" type="submit" name="post_action" value="sign_in">Sign in</button>
+				</form>	
+	      <form class="form-signin" method="post">
+					<h2 class="form-signin-heading">New to Twitter? Sign up</h2>
+					<input type="text" name="user_name" class="input-block-level" placeholder="Desired Username">
+					<input type="text" name="email" class="input-block-level" placeholder="Email">
+					<input type="password" name="password" class="input-block-level" placeholder="Password">
+					<button class="btn btn-large btn-primary" type="submit" name="post_action" value="sign_up">Sign Up</button>
+				</form>	
+			</div>
+		</div>
+	</body>
+</html>

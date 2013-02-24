@@ -42,7 +42,7 @@ def landing_page(request):
 def profile_page(request):
     myuser = MyUser.objects.get(id=request.user.id)
     if request.method == 'POST':
-        tweet_form = twitterforms.TweetForm(request)
+        tweet_form = twitterforms.TweetForm(request.POST)
         if tweet_form.is_valid():
             tweet_form.save()
             tweet_form = twitterforms.TweetForm()

@@ -57,6 +57,14 @@
             </div>
           </div>
           <div class="twitter-box bottom-rectangle">
+              {% for error_type, error_list in tweet_form.errors.iteritems %}
+              {% for error in error_list %}
+              <div class="alert alert-error">
+                {{error}}
+              </div>
+              {% endfor %}
+              {% endfor %}
+
             <form method="post">
               {% csrf_token %}
               <input type="text" id="new_tweet_box" name="text" class="input-large" style="width:100%;height:30px;margin-bottom:0px;" placeholder="Compose new Tweet...">
