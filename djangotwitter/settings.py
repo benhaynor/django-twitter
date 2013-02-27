@@ -1,6 +1,8 @@
 # Django settings for djangotwitter project.
 import os
-BASE_DIR = os.path.dirname(__file__) 
+BASE_DIR = os.path.dirname((os.path.dirname(__file__)))
+print BASE_DIR
+import ipdb
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -13,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/benhaynor/Documents/TechSemester2/Week8/djangotwitter/twitter.db',                      # Or path to database file if using sqlite3.
+        'NAME': '%s/twitter.db' % BASE_DIR,                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -21,6 +23,7 @@ DATABASES = {
     }
 }
 
+print DATABASES['default']['NAME']
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -104,6 +107,7 @@ ROOT_URLCONF = 'djangotwitter.urls'
 WSGI_APPLICATION = 'djangotwitter.wsgi.application'
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'twitter/templates')]
+print TEMPLATE_DIRS 
 #(
         #'/home/benhaynor/Documents/TechSemester2/Week8/djangotwitter/twitter/templates'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
