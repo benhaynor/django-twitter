@@ -68,13 +68,13 @@
           </div>
           {% endfor %}
           <input type="text" name="username" class="input-block-level" placeholder="Desired Username">
-          {% for error in sign_up_form.errors.email%}
+          {% for error in sign_up_form.errors.email %}
           <div class="alert alert-error">
             {{error}}
           </div>
           {% endfor %}
           <input type="text" name="email" class="input-block-level" placeholder="Email">
-          {% for error in sign_up_form.errors.password1 %}
+          {% for error in sign_up_form.errors.email %}
           <div class="alert alert-error">
             {{error}}
           </div>
