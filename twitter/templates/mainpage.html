@@ -26,7 +26,7 @@
               <li><a href="#discover">Discover</a></li>
               <li><a href="#me">Me</a></li>
             </ul>
-            <form method="post" class="navbar-form pull-right" action="/logout">
+            <form method="post" class="navbar-form pull-right" action="{% url logout %}">
               {% csrf_token %}
               <button class="btn" type="submit">Logout</button>	
             </form>
@@ -93,4 +93,3 @@
   </div>	
 </body>
 </html>
-
