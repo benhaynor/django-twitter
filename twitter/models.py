@@ -8,6 +8,7 @@ class MyUser(User):
     class Meta:
         proxy = True
 
+    @property
     def tweets(self):
         return Tweet.objects.filter(author__exact=self.id).order_by('-created')
 

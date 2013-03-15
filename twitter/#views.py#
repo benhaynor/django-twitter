@@ -40,7 +40,6 @@ def landing_page(request):
             {'sign_up_form': sign_up_form,'sign_in_form':sign_in_form},
             RequestContext(request))
 
-
 def profile_page(request):
     myuser = MyUser.objects.get(id=request.user.id)
     if request.method == 'POST':
@@ -50,7 +49,7 @@ def profile_page(request):
             tweet_form = twitterforms.TweetForm()
     else:
         tweet_form = twitterforms.TweetForm()
-    return render(request,'mainpage.html', {'tweet_form': tweet_form, 'myuser': myuser,'current_time':datetime.datetime.now()})
+    return render(request,'mainpage.html', {'tweet_form': tweet_form, 'tweets': myuser.tweets,'current_time':datetime.datetime.now()})
 
 def logout(request):
     auth.logout(request) 

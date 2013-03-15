@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "resources/base.html" %}
 {% block head %}
 <link href="/static/base.css" rel="stylesheet">
 {% endblock %}
@@ -28,7 +28,6 @@
 {% block body %}
 {% load twitter_extras %}
 <div class="container" id="main-container">
-  <p>This post was last updated at {{ user.username|mylower }}.</p>
   <div class="row">
     <div class="span4 column" id="left-column">
       <div class="twitter-box top-rectangle">
@@ -67,7 +66,7 @@
 
     <div class="span6 column" id="right-column">
       <div class="twitter-box top-rectangle"><h3>Tweets</h3></div>
-      {% for t in tweets %}
+      {% for t in myuser.tweets %}
       <div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">{{t.text}}</div>	
       {% endfor %}
     </div>
