@@ -1,4 +1,5 @@
 from django.contrib.auth import decorators
+import datetime
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -48,7 +49,9 @@ def profile_page(request):
             tweet_form = twitterforms.TweetForm()
     else:
         tweet_form = twitterforms.TweetForm()
-    return render_to_response('mainpage.html', {'tweet_form': tweet_form, 'tweets': myuser.tweets()}, RequestContext(request))
+    return render_to_response('mainpage.html', {'tweet_form': tweet_form, 'tweets': myuser.tweets(),'current_time':datetime.datetime.now(),
+        'some_list' : [1,2,3,4,5]}
+            , RequestContext(request))
 
 def logout(request):
     auth.logout(request) 

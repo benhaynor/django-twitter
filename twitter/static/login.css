@@ -1,7 +1,8 @@
 body {
 	background-image:url('loginbg.jpg');
+	background-repeat:no;
 	background-size:100%;
-
+	background-color: #000000;
 }
 
 .message{
@@ -52,4 +53,3 @@ body {
 	padding:0;
 	bottom:50%;
 }
-

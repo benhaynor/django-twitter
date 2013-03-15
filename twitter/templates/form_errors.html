@@ -1,0 +1,7 @@
+{% for error_type, error_list in form.errors.iteritems %}
+{% for error in error_list %}
+<div class="alert alert-error">
+  {{error}}
+</div>
+{% endfor %}
+{% endfor %}
