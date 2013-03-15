@@ -10,7 +10,6 @@ from django import forms
 from django.http import HttpResponseRedirect
 from twitter.models import Tweeter
 import twitter.forms as twitterforms 
-import ipdb
 
 def landing_page(request):
     if request.user.is_authenticated():
