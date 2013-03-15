@@ -1,4 +1,5 @@
 from django.contrib.auth import decorators
+from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponse
 from django.template import RequestContext
@@ -40,7 +41,7 @@ def landing_page(request):
             {'sign_up_form': sign_up_form,'sign_in_form':sign_in_form},
             RequestContext(request))
 
-
+@login_required(login_url='/')
 def profile_page(request):
     myuser = MyUser.objects.get(id=request.user.id)
     if request.method == 'POST':
