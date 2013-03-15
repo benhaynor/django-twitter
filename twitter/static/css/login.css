@@ -1,6 +1,6 @@
 body {
 	margin : 40px;
-	background-image:url('loginbg.jpg');
+	background-image:url('/static/img/loginbg.jpg');
 	background-repeat:no-repeat;
 	background-size:100%;
 	background-color: #000000;
