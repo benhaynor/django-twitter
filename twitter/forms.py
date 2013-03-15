@@ -3,7 +3,9 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib import auth
-import twitter.models as twitter_models
+import twitter.models
+from twitter.models import Tweeter
+
 
 class SignInForm(forms.Form):
 
@@ -36,11 +38,11 @@ class TweetForm(forms.Form):
         return text
 
     def clean_author(self):
-        author = User.objects.get(id=self.cleaned_data['author'])
+        author = User.objects.get(id=self.cleaned_data['author']).tweeter
         return author
     
     def save(self):
-        tweet = twitter_models.Tweet(author=self.cleaned_data['author'], text=self.cleaned_data['text'])
+        tweet = twitter.models.Tweet(author=self.cleaned_data['author'], text=self.cleaned_data['text'])
         tweet.save()
 
 class UserCreationForm(forms.Form):
@@ -78,4 +80,6 @@ class UserCreationForm(forms.Form):
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
+            new_tweeter = Tweeter(user=user)
+            new_tweeter.save()
         return user

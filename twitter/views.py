@@ -8,7 +8,7 @@ from django.contrib import auth
 from twitter.forms import UserCreationForm
 from django import forms
 from django.http import HttpResponseRedirect
-from twitter.models import MyUser
+from twitter.models import Tweeter
 import twitter.forms as twitterforms 
 import ipdb
 
@@ -43,7 +43,7 @@ def landing_page(request):
 
 @login_required(login_url='/')
 def profile_page(request):
-    myuser = MyUser.objects.get(id=request.user.id)
+    myuser = request.user.tweeter
     if request.method == 'POST':
         tweet_form = twitterforms.TweetForm(request.POST)
         if tweet_form.is_valid():
