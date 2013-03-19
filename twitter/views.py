@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from twitter.models import Tweeter
 import twitter.forms as twitterforms 
 
+
 def landing_page(request):
     if request.user.is_authenticated():
         return profile_page(request)

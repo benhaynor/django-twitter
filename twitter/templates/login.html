@@ -13,15 +13,16 @@
   {% endif %}	
   <div id="left-column" class="span5 column">
     <div id="twitter-welcome">
-      <h2>Welcome to fake twitter. Rock!</h2>	
+      <h2>Welcome to Twitter.</h2> 
+      <h3>Find out what da go on, right now, with the people and organizations you care about.</h3>	
     </div>
   </div>
   <div id="login-forms" class="span4 column"> 
     <form class="form-signin" method="post">
       <input type="hidden" name="post_action" value="sign_in"></input>
       {% csrf_token %}
-      {% error_div sign_in_form.non_field_errors %}
       <h2 class="form-signin-heading">Please sign in</h2>
+      {% error_div sign_in_form.non_field_errors %}
       {% error_div sign_in_form.errors.username %}
       <input type="text" name="username" class="input-block-level" placeholder="Username">
       {% error_div sing_in_form.errors.password %}

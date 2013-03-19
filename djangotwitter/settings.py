@@ -1,7 +1,6 @@
 # Django settings for djangotwitter project.
 import os
 BASE_DIR = os.path.dirname((os.path.dirname(__file__)))
-import ipdb
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
