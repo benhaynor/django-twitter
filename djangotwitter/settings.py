@@ -26,6 +26,7 @@ if socket.gethostname() == 'bunbuntu':
 else:
     #Heroku configuration
 	import dj_database_url
+    DATABASES {}
 	DATABASES['default'] =  dj_database_url.config()
 	
 	# Honor the 'X-Forwarded-Proto' header for request.is_secure()
