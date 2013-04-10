@@ -3,7 +3,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 import os
 from os import environ
-import urlparse
+from urlparse import urlparse
 import socket
 ADMINS = (
         # ('Your Name', 'your_email@example.com'),
