@@ -3,6 +3,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 import os
 from os import environ
+import urlparse
 import socket
 ADMINS = (
         # ('Your Name', 'your_email@example.com'),
@@ -22,15 +23,16 @@ if socket.gethostname() == 'bunbuntu':
                 'PORT': environ.get('PS_PORT'),                      # Set to empty string for default. Not used with sqlite3.
                 }
             }
-
-else:
-    #Heroku configuration
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] =  dj_database_url.config()
-
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+elif environ.has_key('DATABASE_URL'):
+    url = urlparse(environ['DATABASE_URL'])
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': url.path[1:],
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
+    }
 
 
 # Local time zone for this installation. Choices can be found here:
