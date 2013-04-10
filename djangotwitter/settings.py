@@ -25,6 +25,7 @@ if socket.gethostname() == 'bunbuntu':
             }
 elif environ.has_key('DATABASE_URL'):
     url = urlparse(environ['DATABASE_URL'])
+    DATABASES = {}
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': url.path[1:],
