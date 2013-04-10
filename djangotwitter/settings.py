@@ -1,8 +1,8 @@
 # Django settings for djangotwitter project.
-import os
-BASE_DIR = os.path.dirname((os.path.dirname(__file__)))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+import os
+from os import environ
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -12,12 +12,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '%s/twitter.db' % BASE_DIR,                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',#'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': environ.get('PS_NAME'),#'%s/twitter.db' % BASE_DIR, # Or path to database file if using sqlite).
+        'USER': environ.get('PS_USER'),                      # Not used with sqlite3.
+        'PASSWORD': environ.get('PS_PASSWORD'),                  # Not used with sqlite3.
+        'HOST': environ.get('PS_HOST'),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': environ.get('PS_PORT'),                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -103,7 +103,7 @@ ROOT_URLCONF = 'djangotwitter.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'djangotwitter.wsgi.application'
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'twitter/templates')]
+TEMPLATE_DIRS = []
 #(
         #'/home/benhaynor/Documents/TechSemester2/Week8/djangotwitter/twitter/templates'
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
