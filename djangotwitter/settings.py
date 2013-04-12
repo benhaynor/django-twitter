@@ -10,6 +10,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#DEV
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
@@ -25,8 +26,9 @@ if environ.get('MODE') and environ.get('MODE') == 'DEV':
                 'PORT': environ.get('PS_PORT'),                      # Set to empty string for default. Not used with sqlite3.
                 }
             }
+#PROD
 elif environ.has_key('DATABASE_URL'):
-    DEBUG = True
+    DEBUG = False 
     TEMPLATE_DEBUG = DEBUG
     STATIC_URL = 'https://s3.amazonaws.com/djangotwitter/static/'
     url = urlparse(environ['DATABASE_URL'])
