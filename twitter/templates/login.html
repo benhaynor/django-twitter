@@ -1,6 +1,7 @@
 {% extends "resources/base.html" %}
 {% block head %}
-<link href="/static/css/login.css" rel="stylesheet">
+{% load staticfiles %}
+<link href= {% static "css/login.css"%} rel="stylesheet">
 {% endblock %}
 
 {% block body %}

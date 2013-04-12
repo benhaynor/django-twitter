@@ -1,6 +1,7 @@
 {% extends "resources/base.html" %}
 {% block head %}
-<link href="/static/css/base.css" rel="stylesheet">
+{% load staticfiles %}
+<link href={% static "css/base.css" %} rel="stylesheet">
 {% endblock %}
 {% block navbarcontents %}
 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
