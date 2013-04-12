@@ -1,6 +1,5 @@
 # Django settings for djangotwitter project.
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
 import os
 from os import environ
 from urlparse import urlparse
@@ -12,6 +11,9 @@ ADMINS = (
 MANAGERS = ADMINS
 
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    STATIC_URL = '/static/'
     DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',#'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -23,6 +25,9 @@ if environ.get('MODE') and environ.get('MODE') == 'DEV':
                 }
             }
 elif environ.has_key('DATABASE_URL'):
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    STATIC_URL = '/static/'
     url = urlparse(environ['DATABASE_URL'])
     DATABASES = {}
     DATABASES['default'] = {
@@ -75,7 +80,7 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+
 
 # Additional locations of static files
 STATICFILES_DIRS = (
