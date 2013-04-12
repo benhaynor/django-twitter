@@ -13,6 +13,7 @@ MANAGERS = ADMINS
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
+    #STATIC_URL = 'https://s3.amazonaws.com/djangotwitter/static/'
     STATIC_URL = '/static/'
     DATABASES = {
             'default': {
@@ -142,6 +143,7 @@ INSTALLED_APPS = (
         'django.contrib.admin',
         # Uncomment the next line to enable admin documentation:
         'django.contrib.admindocs',
+        'gunicorn',
         )
 
 # A sample logging configuration. The only tangible logging
