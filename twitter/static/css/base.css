@@ -1,12 +1,12 @@
 body {
 	margin : 40px;
-	background-image:url('/static/img/bg.png');
+	background-image:url('https://s3.amazonaws.com/djangotwitter/static/img/bg.png');
 	background-repeat:no-repeat;
 	background-color:#c1deee;
 }
 
 #main-container{
-	background-image:url('/static/img/white-wash.png');
+	background-image:url('https://s3.amazonaws.com/djangotwitter/static/img/white-wash.png');
 	background-repeat:repeat;	
 	overflow:visible;
 	height:auto;	
