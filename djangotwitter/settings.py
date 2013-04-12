@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
-    STATIC_URL = '/https://s3.amazonaws.com/djangotwitter/static/'
+    STATIC_URL = '/static/'
     DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',#'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.

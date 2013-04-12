@@ -67,13 +67,15 @@
 
     <div class="span6 column" id="right-column">
 
+      {% load staticfiles %}
       <div class="twitter-box top-rectangle"><h3>Tweets</h3></div>
       {% for t in myuser.tweets %}
       <div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">
 
         <div class="row">
+          
           <div class="span1">
-            <img src="/static/img/profile_picture.png">
+            <img src= {% static "img/profile_picture.png" %}>
           </div>
           <div class="span4">
             <div class="tweet-author">
