@@ -4,15 +4,18 @@ import os
 from os import environ
 from urlparse import urlparse
 import socket
+
+ALLOWED_HOSTS = ['*']
+
 ADMINS = (
-        # ('Your Name', 'your_email@example.com'),
+        ('Ben Haynor', 'haynorb@gmail.com'),
         )
 
 MANAGERS = ADMINS
 
 #DEV
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
-    DEBUG = True
+    DEBUG = False 
     TEMPLATE_DEBUG = DEBUG
     #STATIC_URL = 'https://s3.amazonaws.com/djangotwitter/static/'
     STATIC_URL = '/static/'
