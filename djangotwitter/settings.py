@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 
 #DEV
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
-    DEBUG = False 
+    DEBUG = True
     TEMPLATE_DEBUG = DEBUG
     #STATIC_URL = 'https://s3.amazonaws.com/djangotwitter/static/'
     STATIC_URL = '/static/'
