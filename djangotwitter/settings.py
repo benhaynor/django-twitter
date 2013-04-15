@@ -138,6 +138,7 @@ TEMPLATE_DIRS = []
 
 INSTALLED_APPS = (
         'twitter',
+        'mobile',
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
