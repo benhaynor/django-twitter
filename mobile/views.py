@@ -5,7 +5,7 @@ import logging
 from twitter.forms import *
 
 def hello(request):
-    return render(request,'index.html', {'content': 'Welcome to a jQueryMobile page'}) 
+    return render(request,'mobile/index.html', {'content': 'Welcome to a jQueryMobile page'}) 
 
 def home(request):
     return render(request, 'home.html', {'content': 'This could be dynamic!'}) 

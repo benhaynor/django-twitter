@@ -10,5 +10,6 @@ urlpatterns = patterns('twitter.mobileviews',
     url('/home/$','home'),
     url('^/me/$','me'),
     url('^/content/$','content'),
+    url('^/newtweet/$','newtweet'),
 )
 
