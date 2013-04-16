@@ -4,12 +4,12 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('twitter.mobileviews',
-    url('^/$','hello'),
-    url('^/discover/$','discover'),
-    url('/home/$','home'),
-    url('^/me/$','me'),
-    url('^/content/$','content'),
-    url('^/newtweet/$','newtweet'),
+urlpatterns = patterns('',
+    url('^/$','twitter.mobileviews.hello'),
+    url('^/discover/$','twitter.mobileviews.discover'),
+    url('/home/$','twitter.views.landing_page'),
+    url('^/me/$','twitter.mobileviews.me'),
+    url('^/content/$','twitter.mobileviews.content'),
+    url('^/newtweet/$','twitter.mobileviews.newtweet'),
 )
 
