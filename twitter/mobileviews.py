@@ -8,7 +8,10 @@ def main(request):
     if request.is_ajax():
         return home(request)
     else:
-        return render(request,'mobile/index.html')
+        if request.user.is_authenticated():
+            return render(request,'mobile/index_signed_in.html')
+        else:
+            return render(request,'mobile/index.html')
 
 def home(request):
     if request.method == 'POST':
