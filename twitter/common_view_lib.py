@@ -4,7 +4,6 @@ from django.contrib import auth
 from twitter.forms import UserCreationForm
 from django.http import HttpResponseRedirect
 import twitter.forms as twitterforms 
-MOBILE_ROOT = 'mobile/'
 
 def login_view(request,profile_url,template_str):
     if request.method == 'POST':

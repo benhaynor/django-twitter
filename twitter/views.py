@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 MOBILE_ROOT = 'mobile/'
 import logging
 from twitter.common_view_lib import login_view
+import twitter.forms as twitterforms
+from django.shortcuts import render
 
 def landing_page(request):
     logging.error('got me')
@@ -23,7 +25,7 @@ def profile_page(request):
             tweet_form = twitterforms.TweetForm()
     else:
         tweet_form = twitterforms.TweetForm()
-    return render(request,'mainpage.html', {'tweet_form': tweet_form, 'myuser': myuser,'current_time':datetime.datetime.now()})
+    return render(request,'mainpage.html', {'tweet_form': tweet_form, 'myuser': myuser})
 
 def logout(request):
     auth.logout(request) 

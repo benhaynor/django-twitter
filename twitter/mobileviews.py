@@ -15,13 +15,10 @@ def main(request):
             return render(request,'mobile/index.html')
 
 def home(request):
-    if request.method == 'POST':
-        return login_view(request,'/mobile/','mobile/profile_page.html')
+    if request.user.is_authenticated():
+        return render(request, 'mobile/profile_page.html')
     else:
-        if request.user.is_authenticated():
-            return render(request, 'mobile/profile_page.html')
-        else:
-            return render(request, 'mobile/login.html')
+        return login_view(request,'/mobile/','mobile/login.html')
 
 def discover(request):
     return render(request, 'mobile/discover.html')
