@@ -2,13 +2,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import logging
-from twitter.forms import *
+import twitter.views 
 
-def hello(request):
-    return render(request,'mobile/index.html', {'content': 'Welcome to a jQueryMobile page'}) 
+def main(request):
+    if request.is_ajax():
+        return home(request)
+    else:
+        return render(request,'mobile/index.html')
 
 def home(request):
-    return render(request, 'mobile/home.html', {'content': 'This could be dynamic!'}) 
+    if request.method == 'POST':
+        return twitter.views.landing_page(request)
+    else:
+        return render(request, 'mobile/home.html')
 
 def discover(request):
     return render(request, 'mobile/discover.html')
@@ -18,3 +24,9 @@ def me(request):
 
 def newtweet(request):
     return render(request, 'mobile/newtweet.html')
+
+def sign_in_success(request):
+    return render(request, 'mobile/sign_in_success.html')
+
+def sign_up_success(request):
+    return render(request, 'mobile/sign_up_success.html')

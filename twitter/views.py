@@ -13,8 +13,10 @@ import twitter.forms as twitterforms
 from twitter.serializers import TweetSerializer
 from rest_framework import serializers, generics
 MOBILE_ROOT = 'mobile/'
+import logging
 
 def landing_page(request):
+    logging.error('got me')
     if request.is_ajax():
         prefix = MOBILE_ROOT
     else:
@@ -29,14 +31,20 @@ def landing_page(request):
                 sign_up_form.save()
                 user = auth.authenticate(username = request.POST['username'], password = request.POST['password1'])
                 auth.login(request,user)
-                return HttpResponseRedirect('/' + prefix)
+                if request.is_ajax():
+                    return HttpResponseRedirect('/mobile/sign_up_success/')
+                else:
+                    return HttpResponseRedirect('/')
 
         elif post_action == 'sign_in':
             sign_in_form = twitterforms.SignInForm(request.POST)
             if sign_in_form.is_valid():
                 user = auth.authenticate(username = request.POST['username'], password = request.POST['password'])
                 auth.login(request,user)
-                return HttpResponseRedirect("/" + prefix) 
+                if request.is_ajax():
+                    return HttpResponseRedirect('/mobile/sign_in_success/') 
+                else:
+                    return HttpResponseRedirect("/" + prefix) 
 
     #Get, and bad unsuccesful login, signup 
     if not 'sign_up_form' in locals():

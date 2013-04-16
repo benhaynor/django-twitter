@@ -6,7 +6,6 @@ admin.autodiscover()
 
 import twitter.urls
 import twitter.mobileurls
-import mobile.urls
 
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
