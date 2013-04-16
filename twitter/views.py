@@ -12,8 +12,13 @@ from twitter.models import Tweeter, Tweet
 import twitter.forms as twitterforms 
 from twitter.serializers import TweetSerializer
 from rest_framework import serializers, generics
+MOBILE_ROOT = '/mobile'
 
 def landing_page(request):
+    if request.is_ajax():
+        prefix = MOBILE_ROOT
+    else:
+        prefix = ''
     if request.user.is_authenticated():
         return profile_page(request)
     if request.method == 'POST':
@@ -24,23 +29,23 @@ def landing_page(request):
                 sign_up_form.save()
                 user = auth.authenticate(username = request.POST['username'], password = request.POST['password1'])
                 auth.login(request,user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect(prefix + '/')
 
         elif post_action == 'sign_in':
             sign_in_form = twitterforms.SignInForm(request.POST)
             if sign_in_form.is_valid():
                 user = auth.authenticate(username = request.POST['username'], password = request.POST['password'])
                 auth.login(request,user)
-                return HttpResponseRedirect("/") 
+                return HttpResponseRedirect(prefix + "/") 
 
     #Get, and bad unsuccesful login, signup 
     if not 'sign_up_form' in locals():
         sign_up_form = UserCreationForm()
     if not 'sign_in_form' in locals():
         sign_in_form = twitterforms.SignInForm() 
-    return render_to_response('login.html',
-            {'sign_up_form': sign_up_form,'sign_in_form':sign_in_form},
-            RequestContext(request))
+    return render_to_response(prefix + 'login.html',
+        {'sign_up_form': sign_up_form,'sign_in_form':sign_in_form},
+        RequestContext(request))
 
 @login_required(login_url='/')
 def profile_page(request):
