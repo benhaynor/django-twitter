@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 import logging
 import twitter.views 
+from twitter.common_view_lib import login_view
 
 def main(request):
     if request.is_ajax():
@@ -15,10 +16,10 @@ def main(request):
 
 def home(request):
     if request.method == 'POST':
-        return twitter.views.landing_page(request)
+        return login_view(request,'/mobile/','mobile/profile_page.html')
     else:
         if request.user.is_authenticated():
-            return render(request, 'mobile/provile_page.html')
+            return render(request, 'mobile/profile_page.html')
         else:
             return render(request, 'mobile/login.html')
 
