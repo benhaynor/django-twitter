@@ -17,7 +17,10 @@ def home(request):
     if request.method == 'POST':
         return twitter.views.landing_page(request)
     else:
-        return render(request, 'mobile/home.html')
+        if request.user.is_authenticated():
+            return render(request, 'mobile/home.html')
+        else:
+            return render(request, 'mobile/login.html')
 
 def discover(request):
     return render(request, 'mobile/discover.html')
