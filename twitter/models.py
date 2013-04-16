@@ -16,5 +16,9 @@ class Tweet(models.Model):
     author = models.ForeignKey(Tweeter)
     created = models.DateTimeField(auto_now=True)
 
+    @property
+    def author_user(self):
+        return self.auther.user
+
     def __unicode__(self):
         return "%s,%s" % (self.author.username, self.text)

@@ -5,6 +5,10 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('mobile.views',
-    url('','hello'),
+    url('^/$','hello'),
+    url('^/discover/$','discover'),
+    url('/home/$','home'),
+    url('^/me/$','me'),
+    url('^/content/$','content'),
 )
 

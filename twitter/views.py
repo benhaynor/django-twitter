@@ -8,9 +8,10 @@ from django.contrib import auth
 from twitter.forms import UserCreationForm
 from django import forms
 from django.http import HttpResponseRedirect
-from twitter.models import Tweeter
+from twitter.models import Tweeter, Tweet
 import twitter.forms as twitterforms 
-
+from twitter.serializers import TweetSerializer
+from rest_framework import serializers, generics
 
 def landing_page(request):
     if request.user.is_authenticated():
@@ -56,3 +57,11 @@ def profile_page(request):
 def logout(request):
     auth.logout(request) 
     return HttpResponseRedirect('/')
+
+class TweetDetail(generics.RetrieveUpdateDestroyAPIView):
+    model = Tweet
+    serializer_class = TweetSerializer 
+
+class TweetList(generics.ListCreateAPIView):
+    model = Tweet
+    serializer_class = TweetSerializer
