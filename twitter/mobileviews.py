@@ -18,7 +18,7 @@ def home(request):
         return twitter.views.landing_page(request)
     else:
         if request.user.is_authenticated():
-            return render(request, 'mobile/home.html')
+            return render(request, 'mobile/provile_page.html')
         else:
             return render(request, 'mobile/login.html')
 
