@@ -2,10 +2,8 @@ function getTweets(){
 	$.getJSON('/api/users/' + userid + '/tweets', function(data){
 		var tweetzone = $("#tweetzone");
 		for(i = 0; i < data.length; i ++){
-			window.console.log(data[i]);
-			window.console.log(data[i].text);
 			tweetzone.append('<div class="tweet">' + data[i].text + '!</div>');
-		}
+		};
 	});
 }
 
@@ -18,9 +16,14 @@ function postTweet(){
 	});
 }
 
-//
 function getUsers(){
-	$("#userzone").html("I could be displaying a list of users");
+	var userzone = $("#userGetter");
+	$.getJSON('/api/users/', function(data){
+		for (i in data){
+			window.console.log(data[i]);
+			userzone.append('<div class="user">' + data[i].username + '!</div>');
+		}	
+	})
 }
 
 $(function(){
