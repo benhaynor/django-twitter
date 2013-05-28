@@ -18,8 +18,13 @@ function postTweet(){
 	});
 }
 
+//
+function getUsers(){
+	$("#userzone").html("I could be displaying a list of users");
+}
 
 $(function(){
 	$("#tweetGetter").click(getTweets);
 	$("#tweetPoster").click(postTweet);
+	$("#userGetter").click(getUsers);
 });
