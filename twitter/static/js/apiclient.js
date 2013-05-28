@@ -17,13 +17,8 @@ function postTweet(){
 }
 
 function getUsers(){
-	var userzone = $("#userGetter");
-	$.getJSON('/api/users/', function(data){
-		for (i in data){
-			window.console.log(data[i]);
-			userzone.append('<div class="user">' + data[i].username + '!</div>');
-		}	
-	})
+	var userzone = $("#userzone");
+	userzone.append('<div class="user">' + "I could be a list of users" + '!</div>');
 }
 
 $(function(){
