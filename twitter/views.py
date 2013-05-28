@@ -9,7 +9,6 @@ import twitter.forms as twitterforms
 from django.shortcuts import render
 
 def landing_page(request):
-    logging.error('got me')
     if request.user.is_authenticated():
         return profile_page(request)
     else:
@@ -17,15 +16,27 @@ def landing_page(request):
 
 @login_required(login_url='/')
 def profile_page(request):
-    myuser = request.user.tweeter
-    if request.method == 'POST':
-        tweet_form = twitterforms.TweetForm(request.POST)
-        if tweet_form.is_valid():
-            tweet_form.save()
-            tweet_form = twitterforms.TweetForm()
+    '''Branches actions that can be taken from the profile page'''
+    if request.method == 'POST' and request.POST.get('action') == 'post_tweet':
+        return _post_tweet(request)
+    elif request.method == 'POST' and request.POST.get('action') == '':
+        return _post_tweet(request)
     else:
+        return _profile_page_get(request)
+
+def _profile_page_get(request):
+    myuser = request.user.tweeter
+    tweet_form = twitterforms.TweetForm()
+    return render(request,'mainpage.html', {'tweet_form': tweet_form, 'myuser': myuser})
+
+def _post_tweet(request):
+    myuser = request.user.tweeter
+    tweet_form = twitterforms.TweetForm(request.POST)
+    if tweet_form.is_valid():
+        tweet_form.save()
         tweet_form = twitterforms.TweetForm()
     return render(request,'mainpage.html', {'tweet_form': tweet_form, 'myuser': myuser})
+
 
 def logout(request):
     auth.logout(request) 

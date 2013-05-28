@@ -2,6 +2,7 @@
 {% block head %}
 {% load staticfiles %}
 <link href={% static "css/base.css" %} rel="stylesheet">
+<link href={% static "css/mainpage.css" %} rel="stylesheet">
 {% endblock %}
 {% block navbarcontents %}
 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -51,11 +52,31 @@
         <form method="post">
           {% csrf_token %}
           <input type="text" id="new_tweet_box" name="text" class="input-large" style="width:100%;height:30px;margin-bottom:0px;" placeholder="Compose new Tweet...">
+          <input type="hidden" name="action" value="post_tweet">
           <input type="hidden" name="author" value="{{user.id}}">
         </form>
       </div>	
       <div class="twitter-box">
         Who to follow	
+        {% for f in myuser.suggested_friends %}
+        <div class="to-follow">
+          <div class="row">
+            <div class="span1">
+              <img src= {% static "img/profile_picture.png" %}>
+            </div>
+            <div class="span2">
+              <div class="tweet-text">
+                {{f.user.username}}<br>
+                <form id="create_friend" method="post">
+                  <input type="hidden" name="friend_id" value="{{f.id}}">
+                  <input type="hidden" name="action" value="create_friend">
+                  <span onclick="document.forms['create_friend'].submit();">Follow</span>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}    
       </div>
       <div class="twitter-box">
         Trends
@@ -73,7 +94,7 @@
       <div class="twitter-box {% if loop.last %} bottom-rectangle {% else %} middle-rectangle {% endif%} ">
 
         <div class="row">
-          
+
           <div class="span1">
             <img src= {% static "img/profile_picture.png" %}>
           </div>

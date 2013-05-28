@@ -6,10 +6,21 @@ from django.contrib.auth.models import User
 class Tweeter(models.Model):
 
     user = models.OneToOneField(User)
+    following = models.ManyToManyField("self")
 
     @property
     def tweets(self):
         return Tweet.objects.filter(author__exact=self.id).order_by('-created')
+
+    @property
+    def suggested_friends(self):
+        return Tweeter.objects.exclude(id__exact=self.id)[:3]
+
+    def serialized(self):
+        json_rep = {}
+        json_rep['username'] = self.user.username
+        json_rep['tweets'] = '/user/%d/tweets' % self.id
+        return json_rep
 
 class Tweet(models.Model):
     text = models.CharField(max_length=140) 
@@ -22,3 +33,8 @@ class Tweet(models.Model):
 
     def __unicode__(self):
         return "%s,%s" % (self.author.username, self.text)
+
+    def serialized(self):
+        json_rep = {k:str(getattr(self,k)) for k in ('text', 'created')}
+        json_rep['author'] = '/users/%d' % self.author.id
+        return json_rep

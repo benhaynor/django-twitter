@@ -1,10 +1,11 @@
 <div data-role="page" id="profile_page">
   <div data-role="content">
     Welcome {{user.username}}.  This is your profile page.  It could be prettier.
-    <button id="getTweets">Get Tweets</button>
-
+    <form>
+      <input type="hidden" name="userid" value="{{user.id}}">
+      <button></button>
+    </form>
     <div id="tweetarea">
-      tweet area
     </div>
   </div>
   {% include "mobile/resources/footer.html" %}
