@@ -1,6 +1,8 @@
 # Django settings for djangotwitter project.
 
 import os
+import os
+BASE_DIR = os.path.dirname((os.path.dirname(__file__)))
 from os import environ
 from urlparse import urlparse
 import socket
@@ -13,7 +15,23 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#for class settings
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+#STATIC_URL = 'https://s3.amazonaws.com/djangotwitter/static/'
+STATIC_URL = '/static/'
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',#'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': '%s/twitter.db' % BASE_DIR,#'%s/twitter.db' % BASE_DIR, # Or path to database file if using sqlite).
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '',
+            }
+        }
 #DEV
+'''
 if environ.get('MODE') and environ.get('MODE') == 'DEV':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
@@ -44,7 +62,7 @@ elif environ.has_key('DATABASE_URL'):
         'HOST': url.hostname,
         'PORT': url.port,
     }
-
+'''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
